@@ -22,6 +22,17 @@ Ce dossier contient les regles Linux custom de PHASE4.
 - 006-linux-cron.xml
   - Detection activite cron root, repetition anormale et echec execution.
 
+- [010-linux-pfsense_suricata_wanlab_rules.xml](./010-linux-pfsense_suricata_wanlab_rules.xml)
+  - Detection des signatures Suricata WAN LAB 1000201 a 1000205.
+  - La regle de base filtre le champ decode `suricata_sid`, sans imposer
+    un decodeur custom nomme `pfsense-suricata-wanlab`.
+  - Le decodeur actif doit extraire `suricata_sid`; les logs JSON EVE utilisant
+    `alert.signature_id` ne correspondent pas directement a ces regles.
+  - Avant redemarrage, valider avec
+    `docker exec single-node-wazuh.manager-1 /var/ossec/bin/wazuh-analysisd -t`.
+    Utiliser ensuite `wazuh-logtest` avec un vrai log pour verifier le decodage
+    et la regle declenchee.
+
 ## Utilite SOC
 
 - Couvre les vecteurs Linux frequents d un lab:
@@ -50,4 +61,3 @@ bash scripts/run_phase4_linux_attack_test.sh --target-ip 10.10.0.22
 ```bash
 python3 scripts/validate_phase4_rule_ids.py --mode linux --container single-node-wazuh.manager-1
 ```
-

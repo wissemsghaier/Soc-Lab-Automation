@@ -1,0 +1,63 @@
+<group name="soc_lab_windows_file_activity,">
+
+  <!-- 4656: A handle to an object was requested -->
+  <rule id="101100" level="4">
+    <field name="win.system.eventID">^4656$</field>
+    <description>Windows file handle requested (4656)</description>
+    <group>windows,file_activity,handle_requested,</group>
+  </rule>
+
+  <!-- 4663: An attempt was made to access an object -->
+  <rule id="101101" level="5">
+    <field name="win.system.eventID">^4663$</field>
+    <description>Windows file object access (4663)</description>
+    <group>windows,file_activity,object_access,</group>
+  </rule>
+
+  <!-- 4660: An object was deleted -->
+  <rule id="101102" level="7">
+    <field name="win.system.eventID">^4660$</field>
+    <description>Windows object deleted (4660)</description>
+    <group>windows,file_activity,deleted,</group>
+  </rule>
+
+  <!-- 4670: Permissions on an object were changed -->
+  <rule id="101103" level="7">
+    <field name="win.system.eventID">^4670$</field>
+    <description>Windows object permissions changed (4670)</description>
+    <group>windows,file_activity,acl_changed,</group>
+  </rule>
+
+  <!-- 4659: A handle to an object was requested with intent to delete -->
+  <rule id="101104" level="7">
+    <field name="win.system.eventID">^4659$</field>
+    <description>Windows object delete intent (4659)</description>
+    <group>windows,file_activity,delete_intent,</group>
+  </rule>
+
+  <!-- Focus: write/append in C:\fim-test -->
+  <rule id="101110" level="9">
+    <if_sid>101101</if_sid>
+    <field name="win.system.message" type="pcre2">(?i)Object Name:\s+C:\\fim-test\\.*</field>
+    <field name="win.system.message" type="pcre2">(?i)(WriteData|AppendData)</field>
+    <description>Windows file write detected in C:\fim-test (4663)</description>
+    <group>windows,file_activity,fim_test,write_detected,</group>
+  </rule>
+
+  <!-- Focus: delete in C:\fim-test -->
+  <rule id="101111" level="10">
+    <if_sid>101102</if_sid>
+    <field name="win.system.message" type="pcre2">(?i)Object Name:\s+C:\\fim-test\\.*</field>
+    <description>Windows file deletion detected in C:\fim-test (4660)</description>
+    <group>windows,file_activity,fim_test,delete_detected,</group>
+  </rule>
+
+  <!-- Focus: permission change in C:\fim-test -->
+  <rule id="101112" level="8">
+    <if_sid>101103</if_sid>
+    <field name="win.system.message" type="pcre2">(?i)Object Name:\s+C:\\fim-test\\.*</field>
+    <description>Windows ACL change detected in C:\fim-test (4670)</description>
+    <group>windows,file_activity,fim_test,acl_detected,</group>
+  </rule>
+
+</group>

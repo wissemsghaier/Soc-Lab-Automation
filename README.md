@@ -291,3 +291,66 @@ Vérification	Ce qu’on attend	Ton test
 1. Éviter les doublons	Envoyer exactement la même alerte deux fois : TheHive ne doit la créer qu’une fois.	Testé : le deuxième envoi a été refusé avec already exists.
 2. Conserver les nouvelles preuves	Envoyer un événement Sysmon différent, mais lié à la même attaque : sa nouvelle information doit être conservée.	Pas encore testé.
 3. Continuer si Cortex ne répond pas	Même si l’enrichissement dépasse son délai, l’alerte doit rester accessible dans TheHive pour l’analyste.	Pas encore testé.
+
+
+
+
+
+
+6. Dashboard Linux — Intégrité et Accès aux Fichiers
+Objectif :
+
+Surveiller les changements sur les fichiers et dossiers sensibles Linux, identifier les opérations inhabituelles et faciliter leur investigation.
+
+Contenu détaillé :
+
+KPI alertes de changements : ajouts, modifications et suppressions.
+KPI hôtes et chemins distincts concernés.
+Courbe des changements FIM par heure et par hôte.
+Top fichiers et dossiers avec le plus de changements.
+Tableau des changements sur les fichiers critiques : comptes locaux, sudoers, configuration SSH, services et tâches planifiées.
+Tableau des changements de permissions et de propriétaires, selon les attributs collectés.
+Tableau détaillé : date, hôte, chemin, type de changement, attributs modifiés et niveau d’alerte.
+Tableau des opérations auditées sur les fichiers : utilisateur, processus, opération et résultat, si la collecte auditd est configurée.
+Chronologie des événements pour un fichier ou un dossier sélectionné.
+Tableau résumé par hôte : nombre d’alertes, niveau maximal et dernier changement détecté.
+Utilité :
+
+Repérer les modifications sensibles ou inattendues.
+Identifier une altération de configuration, un changement de privilèges ou une persistance potentielle.
+Attribuer les opérations à un utilisateur et un processus lorsque ces informations sont disponibles.
+Distinguer une maintenance légitime d’une activité suspecte.
+7. Dashboard Windows — Intégrité et Accès aux Fichiers
+Objectif :
+
+Surveiller l’intégrité des fichiers et dossiers sensibles Windows, examiner les changements de permissions et investiguer les opérations d’accès auditées.
+
+Contenu détaillé :
+
+KPI alertes de changements : ajouts, modifications et suppressions.
+KPI hôtes et chemins distincts concernés.
+Courbe des changements FIM par heure et par hôte.
+Top fichiers et dossiers avec le plus de changements.
+Tableau des changements sur les fichiers critiques : fichier hosts, dossier Startup, exécutables système et configurations applicatives sélectionnés.
+Tableau des changements de permissions et de propriétaires, selon les attributs collectés.
+Tableau détaillé : date, hôte, chemin, type de changement, attributs modifiés et niveau d’alerte.
+Tableau des opérations auditées sur les fichiers : compte, processus, objet, droits utilisés et résultat, selon les événements collectés.
+Tableau des tentatives d’accès refusées, si l’audit des échecs est configuré.
+Chronologie des événements pour un fichier ou un dossier sélectionné.
+Tableau résumé par hôte : nombre d’alertes, niveau maximal et dernier changement détecté.
+Utilité :
+
+Repérer l’altération de fichiers système ou applicatifs.
+Surveiller les emplacements pouvant servir à la persistance.
+Identifier des changements de permissions ou des opérations d’accès inhabituelles.
+Faciliter l’investigation et la priorisation des incidents.
+
+
+
+
+
+
+syscheck.mode = whodata
+syscheck.audit.user.name
+syscheck.audit.process.name
+syscheck.audit.process.id

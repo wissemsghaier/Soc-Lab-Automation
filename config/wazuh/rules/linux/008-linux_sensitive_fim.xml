@@ -1,0 +1,83 @@
+<group name="syscheck,linux_sensitive_fim,">
+
+  <!-- Laboratoire : permet un test sans toucher aux fichiers critiques -->
+  <rule id="110100" level="10">
+    <if_sid>550,553,554</if_sid>
+    <field name="file" type="pcre2">^/opt/fim-dashboard-test/</field>
+    <description>FIM TEST : changement dans le dossier pilote : $(file)</description>
+    <group>fim_test,</group>
+  </rule>
+
+  <!-- Comptes locaux et bases de mots de passe -->
+  <rule id="110101" level="12">
+    <if_sid>550,553,554</if_sid>
+    <field name="file" type="pcre2">^/etc/(?:passwd|shadow|group|gshadow)$</field>
+    <description>FIM Linux : changement de la base des comptes : $(file)</description>
+    <group>linux_accounts,</group>
+  </rule>
+
+  <!-- Attribution des privileges sudo -->
+  <rule id="110102" level="12">
+    <if_sid>550,553,554</if_sid>
+    <field name="file" type="pcre2">^/etc/(?:sudoers|sudoers\.d/[^/]+)$</field>
+    <description>FIM Linux : changement de la politique sudo : $(file)</description>
+    <group>linux_privileges,</group>
+  </rule>
+
+  <!-- Configuration du serveur SSH -->
+  <rule id="110103" level="11">
+    <if_sid>550,553,554</if_sid>
+    <field name="file" type="pcre2">^/etc/ssh/(?:sshd_config|sshd_config\.d/[^/]+)$</field>
+    <description>FIM Linux : changement de configuration du serveur SSH : $(file)</description>
+    <group>linux_ssh,</group>
+  </rule>
+
+  <!-- Cles autorisees pour les connexions SSH -->
+  <rule id="110104" level="12">
+    <if_sid>550,553,554</if_sid>
+    <field name="file" type="pcre2">^/(?:root|home/[^/]+)/\.ssh/authorized_keys(?:2)?$</field>
+    <description>FIM Linux : changement des cles SSH autorisees : $(file)</description>
+    <group>linux_ssh_keys,</group>
+  </rule>
+
+  <!-- Authentification PAM -->
+  <rule id="110105" level="12">
+    <if_sid>550,553,554</if_sid>
+    <field name="file" type="pcre2">^/etc/(?:pam\.conf|pam\.d/[^/]+)$</field>
+    <description>FIM Linux : changement de la configuration PAM : $(file)</description>
+    <group>linux_authentication,</group>
+  </rule>
+
+  <!-- Taches planifiees -->
+  <rule id="110106" level="11">
+    <if_sid>550,553,554</if_sid>
+    <field name="file" type="pcre2">^/etc/(?:crontab|cron\.(?:d|hourly|daily|weekly|monthly)/[^/]+)$</field>
+    <description>FIM Linux : changement des taches planifiees : $(file)</description>
+    <group>linux_scheduled_tasks,</group>
+  </rule>
+
+  <!-- Services systemd personnalises -->
+  <rule id="110107" level="11">
+    <if_sid>550,553,554</if_sid>
+    <field name="file" type="pcre2">^/etc/systemd/system/.*\.(?:service|timer|socket|conf)$</field>
+    <description>FIM Linux : changement de service ou de configuration systemd : $(file)</description>
+    <group>linux_services,</group>
+  </rule>
+
+  <!-- Configuration Audit -->
+  <rule id="110108" level="12">
+    <if_sid>550,553,554</if_sid>
+    <field name="file" type="pcre2">^/etc/audit/(?:auditd\.conf|audit\.rules|rules\.d/[^/]+|plugins\.d/[^/]+)$</field>
+    <description>FIM Linux : changement de configuration Audit : $(file)</description>
+    <group>linux_audit_config,</group>
+  </rule>
+
+  <!-- Configuration de l'agent Wazuh -->
+  <rule id="110109" level="12">
+    <if_sid>550,553,554</if_sid>
+    <field name="file" type="pcre2">^/var/ossec/etc/(?:ossec\.conf|local_internal_options\.conf|shared/agent\.conf)$</field>
+    <description>FIM Linux : changement de configuration Wazuh : $(file)</description>
+    <group>wazuh_agent_config,</group>
+  </rule>
+
+</group>

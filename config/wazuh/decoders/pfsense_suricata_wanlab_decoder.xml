@@ -1,0 +1,5 @@
+<decoder name="pfsense-suricata-wanlab">
+  <prematch type="pcre2">\[\d+:100020[1-5]:\d+\]\s+WAN LAB -</prematch>
+  <regex type="pcre2">\[\d+:(\d+):\d+\]\s+(.*?)\s+(?:\[Classification:.*?\]\s+)?\[Priority:\s*(\d+)\]\s+\{(\w+)\}\s+([0-9.]+):(\d+)\s+->\s+([0-9.]+>
+  <order>suricata_sid,suricata_msg,suricata_priority,protocol,srcip,srcport,dstip,dstport</order>
+</decoder>

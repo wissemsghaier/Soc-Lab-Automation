@@ -107,7 +107,7 @@
 	</rule>
 
 	<!-- 10b) Potential C2 beacon-like network activity -->
-	<rule id="100509" level="10" frequency="20" timeframe="120">
+	<!-- <rule id="100509" level="10" frequency="20" timeframe="120">
 		<if_matched_sid>100510</if_matched_sid>
 		<same_field>win.eventdata.destinationIp</same_field>
 		<description>PHASE4: Sysmon repeated outbound connections to same destination</description>
@@ -115,6 +115,6 @@
 			<id>T1071</id>
 		</mitre>
 		<group>windows,sysmon,network,possible_c2,attack,</group>
-	</rule>
+	</rule> -->
 
 </group>
