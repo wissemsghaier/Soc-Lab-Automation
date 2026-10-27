@@ -1,0 +1,5 @@
+<decoder name="soc-lab-clamscan">
+  <prematch type="pcre2">^/.+:\s+\S+\s+FOUND$</prematch>
+  <regex type="pcre2">^(/.+):\s+(\S+)\s+FOUND$</regex>
+  <order>clamav_file,clamav_signature</order>
+</decoder>
