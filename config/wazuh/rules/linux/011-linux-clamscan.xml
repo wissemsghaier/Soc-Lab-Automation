@@ -1,0 +1,8 @@
+<group name="soc_lab,clamav,malware,">
+
+  <rule id="110301" level="8">
+    <decoded_as>soc-lab-clamscan</decoded_as>
+    <description>ClamAV : detection $(clamav_signature) dans $(clamav_file)</description>
+  </rule>
+
+</group>
